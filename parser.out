@@ -1,0 +1,538 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement_list
+Rule 1     statement_list -> statement
+Rule 2     statement_list -> statement statement_list
+Rule 3     statement -> INT IDENTIFIER EQUALS expression
+Rule 4     statement -> STR IDENTIFIER EQUALS STRING
+Rule 5     statement -> IDENTIFIER EQUALS expression
+Rule 6     statement -> PRINT expression
+Rule 7     expression -> expression PLUS expression
+Rule 8     expression -> expression MINUS expression
+Rule 9     expression -> expression TIMES expression
+Rule 10    expression -> expression DIVIDE expression
+Rule 11    expression -> ( expression )
+Rule 12    expression -> NUMBER
+Rule 13    expression -> IDENTIFIER
+
+Terminals, with rules where they appear
+
+(                    : 11
+)                    : 11
+DIVIDE               : 10
+EQUALS               : 3 4 5
+IDENTIFIER           : 3 4 5 13
+INT                  : 3
+MINUS                : 8
+NUMBER               : 12
+PLUS                 : 7
+PRINT                : 6
+STR                  : 4
+STRING               : 4
+TIMES                : 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 3 5 6 7 7 8 8 9 9 10 10 11
+statement            : 1 2
+statement_list       : 2 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement_list
+    (1) statement_list -> . statement
+    (2) statement_list -> . statement statement_list
+    (3) statement -> . INT IDENTIFIER EQUALS expression
+    (4) statement -> . STR IDENTIFIER EQUALS STRING
+    (5) statement -> . IDENTIFIER EQUALS expression
+    (6) statement -> . PRINT expression
+
+    INT             shift and go to state 3
+    STR             shift and go to state 5
+    IDENTIFIER      shift and go to state 4
+    PRINT           shift and go to state 6
+
+    statement_list                 shift and go to state 1
+    statement                      shift and go to state 2
+
+state 1
+
+    (0) S' -> statement_list .
+
+
+
+state 2
+
+    (1) statement_list -> statement .
+    (2) statement_list -> statement . statement_list
+    (1) statement_list -> . statement
+    (2) statement_list -> . statement statement_list
+    (3) statement -> . INT IDENTIFIER EQUALS expression
+    (4) statement -> . STR IDENTIFIER EQUALS STRING
+    (5) statement -> . IDENTIFIER EQUALS expression
+    (6) statement -> . PRINT expression
+
+    $end            reduce using rule 1 (statement_list -> statement .)
+    INT             shift and go to state 3
+    STR             shift and go to state 5
+    IDENTIFIER      shift and go to state 4
+    PRINT           shift and go to state 6
+
+    statement                      shift and go to state 2
+    statement_list                 shift and go to state 7
+
+state 3
+
+    (3) statement -> INT . IDENTIFIER EQUALS expression
+
+    IDENTIFIER      shift and go to state 8
+
+
+state 4
+
+    (5) statement -> IDENTIFIER . EQUALS expression
+
+    EQUALS          shift and go to state 9
+
+
+state 5
+
+    (4) statement -> STR . IDENTIFIER EQUALS STRING
+
+    IDENTIFIER      shift and go to state 10
+
+
+state 6
+
+    (6) statement -> PRINT . expression
+    (7) expression -> . expression PLUS expression
+    (8) expression -> . expression MINUS expression
+    (9) expression -> . expression TIMES expression
+    (10) expression -> . expression DIVIDE expression
+    (11) expression -> . ( expression )
+    (12) expression -> . NUMBER
+    (13) expression -> . IDENTIFIER
+
+    (               shift and go to state 12
+    NUMBER          shift and go to state 13
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 11
+
+state 7
+
+    (2) statement_list -> statement statement_list .
+
+    $end            reduce using rule 2 (statement_list -> statement statement_list .)
+
+
+state 8
+
+    (3) statement -> INT IDENTIFIER . EQUALS expression
+
+    EQUALS          shift and go to state 15
+
+
+state 9
+
+    (5) statement -> IDENTIFIER EQUALS . expression
+    (7) expression -> . expression PLUS expression
+    (8) expression -> . expression MINUS expression
+    (9) expression -> . expression TIMES expression
+    (10) expression -> . expression DIVIDE expression
+    (11) expression -> . ( expression )
+    (12) expression -> . NUMBER
+    (13) expression -> . IDENTIFIER
+
+    (               shift and go to state 12
+    NUMBER          shift and go to state 13
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 16
+
+state 10
+
+    (4) statement -> STR IDENTIFIER . EQUALS STRING
+
+    EQUALS          shift and go to state 17
+
+
+state 11
+
+    (6) statement -> PRINT expression .
+    (7) expression -> expression . PLUS expression
+    (8) expression -> expression . MINUS expression
+    (9) expression -> expression . TIMES expression
+    (10) expression -> expression . DIVIDE expression
+
+    INT             reduce using rule 6 (statement -> PRINT expression .)
+    STR             reduce using rule 6 (statement -> PRINT expression .)
+    IDENTIFIER      reduce using rule 6 (statement -> PRINT expression .)
+    PRINT           reduce using rule 6 (statement -> PRINT expression .)
+    $end            reduce using rule 6 (statement -> PRINT expression .)
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+
+
+state 12
+
+    (11) expression -> ( . expression )
+    (7) expression -> . expression PLUS expression
+    (8) expression -> . expression MINUS expression
+    (9) expression -> . expression TIMES expression
+    (10) expression -> . expression DIVIDE expression
+    (11) expression -> . ( expression )
+    (12) expression -> . NUMBER
+    (13) expression -> . IDENTIFIER
+
+    (               shift and go to state 12
+    NUMBER          shift and go to state 13
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 22
+
+state 13
+
+    (12) expression -> NUMBER .
+
+    PLUS            reduce using rule 12 (expression -> NUMBER .)
+    MINUS           reduce using rule 12 (expression -> NUMBER .)
+    TIMES           reduce using rule 12 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 12 (expression -> NUMBER .)
+    INT             reduce using rule 12 (expression -> NUMBER .)
+    STR             reduce using rule 12 (expression -> NUMBER .)
+    IDENTIFIER      reduce using rule 12 (expression -> NUMBER .)
+    PRINT           reduce using rule 12 (expression -> NUMBER .)
+    $end            reduce using rule 12 (expression -> NUMBER .)
+    )               reduce using rule 12 (expression -> NUMBER .)
+
+
+state 14
+
+    (13) expression -> IDENTIFIER .
+
+    PLUS            reduce using rule 13 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 13 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 13 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 13 (expression -> IDENTIFIER .)
+    INT             reduce using rule 13 (expression -> IDENTIFIER .)
+    STR             reduce using rule 13 (expression -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 13 (expression -> IDENTIFIER .)
+    PRINT           reduce using rule 13 (expression -> IDENTIFIER .)
+    $end            reduce using rule 13 (expression -> IDENTIFIER .)
+    )               reduce using rule 13 (expression -> IDENTIFIER .)
+
+
+state 15
+
+    (3) statement -> INT IDENTIFIER EQUALS . expression
+    (7) expression -> . expression PLUS expression
+    (8) expression -> . expression MINUS expression
+    (9) expression -> . expression TIMES expression
+    (10) expression -> . expression DIVIDE expression
+    (11) expression -> . ( expression )
+    (12) expression -> . NUMBER
+    (13) expression -> . IDENTIFIER
+
+    (               shift and go to state 12
+    NUMBER          shift and go to state 13
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 23
+
+state 16
+
+    (5) statement -> IDENTIFIER EQUALS expression .
+    (7) expression -> expression . PLUS expression
+    (8) expression -> expression . MINUS expression
+    (9) expression -> expression . TIMES expression
+    (10) expression -> expression . DIVIDE expression
+
+    INT             reduce using rule 5 (statement -> IDENTIFIER EQUALS expression .)
+    STR             reduce using rule 5 (statement -> IDENTIFIER EQUALS expression .)
+    IDENTIFIER      reduce using rule 5 (statement -> IDENTIFIER EQUALS expression .)
+    PRINT           reduce using rule 5 (statement -> IDENTIFIER EQUALS expression .)
+    $end            reduce using rule 5 (statement -> IDENTIFIER EQUALS expression .)
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+
+
+state 17
+
+    (4) statement -> STR IDENTIFIER EQUALS . STRING
+
+    STRING          shift and go to state 24
+
+
+state 18
+
+    (7) expression -> expression PLUS . expression
+    (7) expression -> . expression PLUS expression
+    (8) expression -> . expression MINUS expression
+    (9) expression -> . expression TIMES expression
+    (10) expression -> . expression DIVIDE expression
+    (11) expression -> . ( expression )
+    (12) expression -> . NUMBER
+    (13) expression -> . IDENTIFIER
+
+    (               shift and go to state 12
+    NUMBER          shift and go to state 13
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 25
+
+state 19
+
+    (8) expression -> expression MINUS . expression
+    (7) expression -> . expression PLUS expression
+    (8) expression -> . expression MINUS expression
+    (9) expression -> . expression TIMES expression
+    (10) expression -> . expression DIVIDE expression
+    (11) expression -> . ( expression )
+    (12) expression -> . NUMBER
+    (13) expression -> . IDENTIFIER
+
+    (               shift and go to state 12
+    NUMBER          shift and go to state 13
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 26
+
+state 20
+
+    (9) expression -> expression TIMES . expression
+    (7) expression -> . expression PLUS expression
+    (8) expression -> . expression MINUS expression
+    (9) expression -> . expression TIMES expression
+    (10) expression -> . expression DIVIDE expression
+    (11) expression -> . ( expression )
+    (12) expression -> . NUMBER
+    (13) expression -> . IDENTIFIER
+
+    (               shift and go to state 12
+    NUMBER          shift and go to state 13
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 27
+
+state 21
+
+    (10) expression -> expression DIVIDE . expression
+    (7) expression -> . expression PLUS expression
+    (8) expression -> . expression MINUS expression
+    (9) expression -> . expression TIMES expression
+    (10) expression -> . expression DIVIDE expression
+    (11) expression -> . ( expression )
+    (12) expression -> . NUMBER
+    (13) expression -> . IDENTIFIER
+
+    (               shift and go to state 12
+    NUMBER          shift and go to state 13
+    IDENTIFIER      shift and go to state 14
+
+    expression                     shift and go to state 28
+
+state 22
+
+    (11) expression -> ( expression . )
+    (7) expression -> expression . PLUS expression
+    (8) expression -> expression . MINUS expression
+    (9) expression -> expression . TIMES expression
+    (10) expression -> expression . DIVIDE expression
+
+    )               shift and go to state 29
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+
+
+state 23
+
+    (3) statement -> INT IDENTIFIER EQUALS expression .
+    (7) expression -> expression . PLUS expression
+    (8) expression -> expression . MINUS expression
+    (9) expression -> expression . TIMES expression
+    (10) expression -> expression . DIVIDE expression
+
+    INT             reduce using rule 3 (statement -> INT IDENTIFIER EQUALS expression .)
+    STR             reduce using rule 3 (statement -> INT IDENTIFIER EQUALS expression .)
+    IDENTIFIER      reduce using rule 3 (statement -> INT IDENTIFIER EQUALS expression .)
+    PRINT           reduce using rule 3 (statement -> INT IDENTIFIER EQUALS expression .)
+    $end            reduce using rule 3 (statement -> INT IDENTIFIER EQUALS expression .)
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+
+
+state 24
+
+    (4) statement -> STR IDENTIFIER EQUALS STRING .
+
+    INT             reduce using rule 4 (statement -> STR IDENTIFIER EQUALS STRING .)
+    STR             reduce using rule 4 (statement -> STR IDENTIFIER EQUALS STRING .)
+    IDENTIFIER      reduce using rule 4 (statement -> STR IDENTIFIER EQUALS STRING .)
+    PRINT           reduce using rule 4 (statement -> STR IDENTIFIER EQUALS STRING .)
+    $end            reduce using rule 4 (statement -> STR IDENTIFIER EQUALS STRING .)
+
+
+state 25
+
+    (7) expression -> expression PLUS expression .
+    (7) expression -> expression . PLUS expression
+    (8) expression -> expression . MINUS expression
+    (9) expression -> expression . TIMES expression
+    (10) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    INT             reduce using rule 7 (expression -> expression PLUS expression .)
+    STR             reduce using rule 7 (expression -> expression PLUS expression .)
+    IDENTIFIER      reduce using rule 7 (expression -> expression PLUS expression .)
+    PRINT           reduce using rule 7 (expression -> expression PLUS expression .)
+    $end            reduce using rule 7 (expression -> expression PLUS expression .)
+    )               reduce using rule 7 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 7 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 7 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 7 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 7 (expression -> expression PLUS expression .) ]
+
+
+state 26
+
+    (8) expression -> expression MINUS expression .
+    (7) expression -> expression . PLUS expression
+    (8) expression -> expression . MINUS expression
+    (9) expression -> expression . TIMES expression
+    (10) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    INT             reduce using rule 8 (expression -> expression MINUS expression .)
+    STR             reduce using rule 8 (expression -> expression MINUS expression .)
+    IDENTIFIER      reduce using rule 8 (expression -> expression MINUS expression .)
+    PRINT           reduce using rule 8 (expression -> expression MINUS expression .)
+    $end            reduce using rule 8 (expression -> expression MINUS expression .)
+    )               reduce using rule 8 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 8 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 8 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 8 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 8 (expression -> expression MINUS expression .) ]
+
+
+state 27
+
+    (9) expression -> expression TIMES expression .
+    (7) expression -> expression . PLUS expression
+    (8) expression -> expression . MINUS expression
+    (9) expression -> expression . TIMES expression
+    (10) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    INT             reduce using rule 9 (expression -> expression TIMES expression .)
+    STR             reduce using rule 9 (expression -> expression TIMES expression .)
+    IDENTIFIER      reduce using rule 9 (expression -> expression TIMES expression .)
+    PRINT           reduce using rule 9 (expression -> expression TIMES expression .)
+    $end            reduce using rule 9 (expression -> expression TIMES expression .)
+    )               reduce using rule 9 (expression -> expression TIMES expression .)
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 9 (expression -> expression TIMES expression .) ]
+  ! MINUS           [ reduce using rule 9 (expression -> expression TIMES expression .) ]
+  ! TIMES           [ reduce using rule 9 (expression -> expression TIMES expression .) ]
+  ! DIVIDE          [ reduce using rule 9 (expression -> expression TIMES expression .) ]
+
+
+state 28
+
+    (10) expression -> expression DIVIDE expression .
+    (7) expression -> expression . PLUS expression
+    (8) expression -> expression . MINUS expression
+    (9) expression -> expression . TIMES expression
+    (10) expression -> expression . DIVIDE expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+    INT             reduce using rule 10 (expression -> expression DIVIDE expression .)
+    STR             reduce using rule 10 (expression -> expression DIVIDE expression .)
+    IDENTIFIER      reduce using rule 10 (expression -> expression DIVIDE expression .)
+    PRINT           reduce using rule 10 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 10 (expression -> expression DIVIDE expression .)
+    )               reduce using rule 10 (expression -> expression DIVIDE expression .)
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    TIMES           shift and go to state 20
+    DIVIDE          shift and go to state 21
+
+  ! PLUS            [ reduce using rule 10 (expression -> expression DIVIDE expression .) ]
+  ! MINUS           [ reduce using rule 10 (expression -> expression DIVIDE expression .) ]
+  ! TIMES           [ reduce using rule 10 (expression -> expression DIVIDE expression .) ]
+  ! DIVIDE          [ reduce using rule 10 (expression -> expression DIVIDE expression .) ]
+
+
+state 29
+
+    (11) expression -> ( expression ) .
+
+    PLUS            reduce using rule 11 (expression -> ( expression ) .)
+    MINUS           reduce using rule 11 (expression -> ( expression ) .)
+    TIMES           reduce using rule 11 (expression -> ( expression ) .)
+    DIVIDE          reduce using rule 11 (expression -> ( expression ) .)
+    INT             reduce using rule 11 (expression -> ( expression ) .)
+    STR             reduce using rule 11 (expression -> ( expression ) .)
+    IDENTIFIER      reduce using rule 11 (expression -> ( expression ) .)
+    PRINT           reduce using rule 11 (expression -> ( expression ) .)
+    $end            reduce using rule 11 (expression -> ( expression ) .)
+    )               reduce using rule 11 (expression -> ( expression ) .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 25 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 25 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 26 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 26 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 26 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 26 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 27 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 27 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 27 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 27 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 28 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 28 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 28 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 28 resolved as shift
